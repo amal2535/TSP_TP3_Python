@@ -1,41 +1,35 @@
 from tsp.solver import City, TravelingSalesman
 import numpy as np
 
-def print_distance_matrix(cities, distance_matrix):
-    print("Matrice des distances:")
-    print("    " + "   ".join(city.name for city in cities)) 
-    for i, row in enumerate(distance_matrix):
-        print(f"{cities[i].name} ", end="")
-        for distance in row:
-            if distance == float('inf'):
-                print("inf ", end="")
-            else:
-                print(f"{distance:3} ", end="")
-        print() 
+class OptimizedTravelingSalesman(TravelingSalesman):
+    def __init__(self, cities, distance_matrix, vehicle_capacity, max_distance, impractical_routes):
+        super().__init__(cities, distance_matrix, vehicle_capacity, max_distance, impractical_routes)
+
+
+
+    def calculate_route_distance(self, route):
+        return sum(self.distance_matrix[route[i], route[i + 1]] for i in range(len(route) - 1))
 
 def main():
+    # Définir les villes
     cities = [
-        City("A", (0, 0), (0, 10), 4),  # City A
-        City("B", (1, 1), (2, 12), 2),  # City B
-        City("C", (2, 2), (3, 15), 2),  # City C
-        City("D", (3, 3), (5, 20), 2),  # City D
+        City("A", (0, 0), (0, 10), 5),  # Ville A
+        City("B", (1, 1), (2, 12), 2),  # Ville B, demande réduite à 2
+        City("C", (2, 2), (3, 15), 2),  # Ville C, demande réduite à 2
+        City("D", (3, 3), (5, 20), 2),  # Ville D
     ]
-    
-    # Distance matrix remains the same
+
+    # Matrice des distances modifiée
     distance_matrix = np.array([[0, 2, 9, float('inf')],
                                  [1, 0, 6, 4],
                                  [float('inf'), 7, 0, 8],
                                  [6, float('inf'), 3, 0]])
 
-
     vehicle_capacity = 10
-    max_distance = 20  
-    impractical_routes = [(0, 2), (2, 3)]  
+    max_distance = 20  # Ajuster la distance maximale si nécessaire
+    impractical_routes = [(0, 2), (2, 3)]  # Routes impraticables
 
-    # Print the distance matrix
-    print_distance_matrix(cities, distance_matrix)
-
-    tsp = TravelingSalesman(cities, distance_matrix, vehicle_capacity, max_distance, impractical_routes)
+    tsp = OptimizedTravelingSalesman(cities, distance_matrix, vehicle_capacity, max_distance, impractical_routes)
     best_route, min_distance = tsp.find_best_route()
 
     if best_route is not None:
