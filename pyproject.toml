@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "tp3-amalmaatoug"
+version = "0.1.0"
+description = "Optimisation du problème de voyageur de commerce"
+authors = ["Amal Maatoug"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+scipy = "^1.14.1"
+ortools = "^9.11.4210"
+networkx = "^3.4.2"
+
+[tool.poetry.group.dev.dependencies]
+numpy = "^2.1.2"
+matplotlib = "^3.9.2"
+scipy = "^1.14.1"
+pytest = "^8.3.3"
+black = "^24.10.0"
+flake8 = "^7.1.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
