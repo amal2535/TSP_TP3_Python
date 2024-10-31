@@ -3,7 +3,7 @@ import numpy as np
 
 def print_distance_matrix(cities, distance_matrix):
     print("Matrice des distances:")
-    print("    " + "   ".join(city.name for city in cities))  # Print city names in the header
+    print("    " + "   ".join(city.name for city in cities)) 
     for i, row in enumerate(distance_matrix):
         print(f"{cities[i].name} ", end="")
         for distance in row:
@@ -11,12 +11,11 @@ def print_distance_matrix(cities, distance_matrix):
                 print("inf ", end="")
             else:
                 print(f"{distance:3} ", end="")
-        print()  # New line after each row
+        print() 
 
 def main():
-    # Définir les villes
     cities = [
-        City("A", (0, 0), (0, 10), 4),  # City A, demand reduced to 4
+        City("A", (0, 0), (0, 10), 4),  # City A
         City("B", (1, 1), (2, 12), 2),  # City B
         City("C", (2, 2), (3, 15), 2),  # City C
         City("D", (3, 3), (5, 20), 2),  # City D
@@ -30,8 +29,8 @@ def main():
 
 
     vehicle_capacity = 10
-    max_distance = 20  # Ajuster la distance maximale si nécessaire
-    impractical_routes = [(0, 2), (2, 3)]  # Routes impraticables
+    max_distance = 20  
+    impractical_routes = [(0, 2), (2, 3)]  
 
     # Print the distance matrix
     print_distance_matrix(cities, distance_matrix)
