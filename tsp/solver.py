@@ -51,7 +51,7 @@ class TravelingSalesman:
         return distance
 
 def plot_route(cities, best_route):
-    # Récupérer les coordonnées des villes dans l'ordre du meilleur chemin
+    # Extract coordinates in order of the best route
     x = [cities[i].coordinates[0] for i in best_route] + [cities[best_route[0]].coordinates[0]]
     y = [cities[i].coordinates[1] for i in best_route] + [cities[best_route[0]].coordinates[1]]
 
@@ -60,10 +60,12 @@ def plot_route(cities, best_route):
     plt.title("Meilleur chemin du TSP")
     plt.xlabel("Coordonnées X")
     plt.ylabel("Coordonnées Y")
-    
-    # Annoter les villes
+
+    # Annotate cities
     for i, city in enumerate(best_route):
-        plt.annotate(cities[city].name, (cities[city].coordinates[0], cities[city].coordinates[1]), textcoords="offset points", xytext=(0,10), ha='center')
+        plt.annotate(cities[city].name, (cities[city].coordinates[0], cities[city].coordinates[1]),
+                     textcoords="offset points", xytext=(0, 10), ha='center')
 
     plt.grid()
+    plt.axis('equal')  # Ensure equal scaling
     plt.show()
