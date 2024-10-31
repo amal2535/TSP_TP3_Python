@@ -1,5 +1,6 @@
 import numpy as np
 from itertools import permutations
+import matplotlib.pyplot as plt
 
 class City:
     def __init__(self, name, coordinates, open_time, demand):
@@ -48,3 +49,21 @@ class TravelingSalesman:
             distance += self.distance_matrix[route[i], route[i + 1]]
         distance += self.distance_matrix[route[-1], route[0]]  
         return distance
+
+def plot_route(cities, best_route):
+    # Récupérer les coordonnées des villes dans l'ordre du meilleur chemin
+    x = [cities[i].coordinates[0] for i in best_route] + [cities[best_route[0]].coordinates[0]]
+    y = [cities[i].coordinates[1] for i in best_route] + [cities[best_route[0]].coordinates[1]]
+
+    plt.figure(figsize=(8, 6))
+    plt.plot(x, y, marker='o', color='b')
+    plt.title("Meilleur chemin du TSP")
+    plt.xlabel("Coordonnées X")
+    plt.ylabel("Coordonnées Y")
+    
+    # Annoter les villes
+    for i, city in enumerate(best_route):
+        plt.annotate(cities[city].name, (cities[city].coordinates[0], cities[city].coordinates[1]), textcoords="offset points", xytext=(0,10), ha='center')
+
+    plt.grid()
+    plt.show()

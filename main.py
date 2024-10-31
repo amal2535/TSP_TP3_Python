@@ -1,4 +1,4 @@
-from tsp.solver import City, TravelingSalesman
+from tsp.solver import City, TravelingSalesman,plot_route
 import numpy as np
 
 def print_distance_matrix(cities, distance_matrix):
@@ -40,6 +40,8 @@ def main():
 
     if best_route is not None:
         print("Meilleur chemin:", [cities[i].name for i in best_route], "Distance:", min_distance)
+        plot_route(cities, best_route)  # Afficher le meilleur chemin
+
     else:
         print("Aucune route valide trouvée.")
 
